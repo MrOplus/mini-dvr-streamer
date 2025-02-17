@@ -2,6 +2,7 @@ const ffmpeg = require('fluent-ffmpeg');
 const express = require('express');
 const cors = require('cors');
 const fs = require('fs-extra');
+const axios = require('axios');
 var currentStream = null;
 function startLiveStream(config) {
     const rtspUrl = config.rtspUrl;
@@ -48,6 +49,7 @@ function startWebServer(config) {
     const app = express();
     const port = config.liveStream.port || 3000;
     app.use(cors());
+    const controlUrl = config.controlUrl;
     //basic credentials
     if (config.liveStream.credentials) {
         app.use((req, res, next) => {
@@ -62,7 +64,23 @@ function startWebServer(config) {
             next()
         });
     }
+    app.use(express.json());
     app.use(express.static('stream'));
+    app.post('/move', (req, res) => {
+        const direction = req.body.direction;
+        axios.get(`${controlUrl}?-step=0&-act=${direction}&-speed=45`).then((response) => {
+            res.send(response.data);
+        }).catch((error) => {
+            res.send(error);
+        });
+    });
+    app.post('/release', (req, res) => {
+        axios.get(`${controlUrl}?-step=0&-act=stop&-speed=45`).then((response) => {
+            res.send(response.data);
+        }).catch((error) => {
+            res.send(error);
+        });
+    });
     app.listen(port, () => {
         console.log(`Web server started on http://localhost:${port}`);
     });

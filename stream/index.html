@@ -1,38 +1,100 @@
-
 <html>
-  <head>
+
+<head>
     <title>Live Home Stream</title>
-  </head>
+    <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
 
-  <body>
+        .directions {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+        }
+
+        button {
+            margin: 10px;
+            padding: 10px;
+            font-size: 20px;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:active {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
     <script src="https://cdn.jsdelivr.net/npm/hls.js@1"></script>
+    <h1>Live Home Stream</h1>
+    <div>
+        <div class="container">
+            <div class="directions">
+                <!-- UP DOWN LEFT RIGHT DIRECTION FOR CAMERA CONTROL -->
+                <button id="up" onmousedown="move('up')" onmouseup="release('up')">UP</button>
+                <button id="down" onmousedown="move('down')" onmouseup="release('down')">DOWN</button>
+                <button id="left" onmousedown="move('left')" onmouseup="release('left')">LEFT</button>
+                <button id="right" onmousedown="move('right')" onmouseup="release('right')">RIGHT</button>
+            </div>
+            <video height="600" id="video" controls></video>
+        </div>
 
-    <center>
-      <h1>Live Home Stream</h1>
-      <video height="600" id="video" controls></video>
-    </center>
+    </div>
 
     <script>
-      var video = document.getElementById('video');
-      if (Hls.isSupported()) {
-        var hls = new Hls({
-          debug: true,
-        });
-        hls.loadSource('stream.m3u8');
-        hls.attachMedia(video);
-        hls.on(Hls.Events.MEDIA_ATTACHED, function () {
-          video.muted = true;
-          video.play();
-        });
-      }
-      // hls.js is not supported on platforms that do not have Media Source Extensions (MSE) enabled.
-      // When the browser has built-in HLS support (check using `canPlayType`), we can provide an HLS manifest (i.e. .m3u8 URL) directly to the video element through the `src` property.
-      // This is using the built-in support of the plain video element, without using hls.js.
-      else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-        video.src = 'stream.m3u8';
-        video.addEventListener('canplay', function () {
-          video.play();
-        });
-      }
+        function move(direction) {
+            fetch('/move', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    direction: direction
+                }),
+            })
+        }
+        function release(direction) {
+            fetch('/release', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    direction: direction
+                }),
+            })
+        }
+        var video = document.getElementById('video');
+        if (Hls.isSupported()) {
+            var hls = new Hls({
+                debug: true,
+            });
+            hls.loadSource('stream.m3u8');
+            hls.attachMedia(video);
+            hls.on(Hls.Events.MEDIA_ATTACHED, function () {
+                video.muted = true;
+                video.play();
+            });
+        }
+        // hls.js is not supported on platforms that do not have Media Source Extensions (MSE) enabled.
+        // When the browser has built-in HLS support (check using `canPlayType`), we can provide an HLS manifest (i.e. .m3u8 URL) directly to the video element through the `src` property.
+        // This is using the built-in support of the plain video element, without using hls.js.
+        else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+            video.src = 'stream.m3u8';
+            video.addEventListener('canplay', function () {
+                video.play();
+            });
+        }
     </script>
+
 </html>
