@@ -30,6 +30,9 @@ function startRecording(config) {
             '-rtsp_transport', 'tcp',
         ])
         .output(outputPath)
+        .on('codecData', (data) => {
+            console.log('Stream codec data:', data);
+        })
         .on('start', (commandLine) => {
             console.log('Recording started with command:', commandLine);
         })

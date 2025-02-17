@@ -4,7 +4,8 @@ const cors = require('cors');
 const fs = require('fs-extra');
 const axios = require('axios');
 var currentStream = null;
-function startLiveStream(config) {
+async function startLiveStream(config) {
+    await new Promise(r => setTimeout(r, 2000));
     const rtspUrl = config.rtspUrl;
     fs.ensureDirSync('stream');
 
@@ -28,6 +29,9 @@ function startLiveStream(config) {
             setTimeout(() => {
                 startLiveStream(config);
             }, 50);
+        })
+        .on('codecData', (data) => {
+            console.log('Stream codec data:', data);
         })
         .on('error', (err) => {
             var errorMessage = err.message;

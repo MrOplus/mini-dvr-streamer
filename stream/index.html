@@ -41,10 +41,10 @@
         <div class="container">
             <div class="directions">
                 <!-- UP DOWN LEFT RIGHT DIRECTION FOR CAMERA CONTROL -->
-                <button id="up" onmousedown="move('up')" onmouseup="release('up')">UP</button>
-                <button id="down" onmousedown="move('down')" onmouseup="release('down')">DOWN</button>
-                <button id="left" onmousedown="move('left')" onmouseup="release('left')">LEFT</button>
-                <button id="right" onmousedown="move('right')" onmouseup="release('right')">RIGHT</button>
+                <button id="up" onmousedown="move('up')" onmouseup="release('up')" ontouchstart="move('up')" ontouchend="release('up')">UP</button>
+                <button id="down" onmousedown="move('down')" onmouseup="release('down')" ontouchstart="move('down')" ontouchend="release('down')">DOWN</button>
+                <button id="left" onmousedown="move('left')" onmouseup="release('left')" ontouchstart="move('left')" ontouchend="release('left')">LEFT</button>
+                <button id="right" onmousedown="move('right')" onmouseup="release('right')" ontouchstart="move('right')" ontouchend="release('right')">RIGHT</button>
             </div>
             <video height="600" id="video" controls></video>
         </div>
