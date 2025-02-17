@@ -1,5 +1,5 @@
 {
-  "name": "rtsp-recorder",
+  "name": "mini-dvr-stream",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,13 +7,14 @@
     "test": "node index.js",
     "start": "node index.js"
   },
-  "author": "Kacper Marcinkiewicz",
-  "license": "MIT",
+  "author": "MrOplus",
+  "license": "",
   "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
     "fluent-ffmpeg": "^2.1.2",
     "fs-extra": "^11.2.0",
     "moment-timezone": "^0.5.43",
-    "path": "^0.12.7",
-    "rtsp-video-recorder": "^2.2.0"
+    "path": "^0.12.7"
   }
 }

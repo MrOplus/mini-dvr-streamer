@@ -1,0 +1,19 @@
+{
+    "rtspUrl": "rtsp://admin:admin@192.168.100.2/1",
+    "timeZone": "Asia/Dubai",
+    "liveStream": {
+        "enabled": true,
+        "port": 8054,
+        "credentials": {
+            "username": "admin",
+            "password": "admin"
+        }
+    },
+    "recording": {
+        "recordingsDirectory": "recordings",
+        "diskSpaceThresholdMb": 10000,
+        "segmentTimeSeconds": 600,
+        "enabled": true
+    }
+}
+  
