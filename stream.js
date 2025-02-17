@@ -21,7 +21,6 @@ function startLiveStream(config) {
         ])
         .output('stream/stream.m3u8')
         .on('start', (commandLine) => {
-            commandLine = commandLine.replace(rtspUrl, '[REDACTED]');
             console.log('Live stream started with command:', commandLine);
         })
         .on('end', () => {
@@ -31,7 +30,7 @@ function startLiveStream(config) {
             }, 50);
         })
         .on('error', (err) => {
-            var errorMessage = err.message.replace(rtspUrl, '[REDACTED]');
+            var errorMessage = err.message;
             console.error('Error during live stream:', errorMessage);
             if (errorMessage.includes('401 Unauthorized')) {
                 console.error('Check if the RTSP URL is correct and credentials are provided.');

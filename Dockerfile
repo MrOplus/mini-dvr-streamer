@@ -1,6 +1,7 @@
 FROM node:23-bookworm 
 # Copy the package.json and package-lock.json
 RUN apt update && apt install ffmpeg -y
+WORKDIR /app
 COPY package*.json ./
 
 # Install the dependencies

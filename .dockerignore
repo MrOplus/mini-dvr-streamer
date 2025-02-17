@@ -17,9 +17,14 @@ dist/
 
 # Custom folders and files
 recordings/
+config.json
 
 stream/*.m3u8
 stream/*.ts
 *.mp4
 
 
+
+**/.git
+Dockerfile
+**/.github

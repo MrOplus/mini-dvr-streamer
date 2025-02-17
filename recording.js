@@ -31,7 +31,6 @@ function startRecording(config) {
         ])
         .output(outputPath)
         .on('start', (commandLine) => {
-            commandLine = commandLine.replace(rtspUrl, '[REDACTED]');
             console.log('Recording started with command:', commandLine);
         })
         .on('end', () => {
@@ -41,7 +40,7 @@ function startRecording(config) {
             }, 50);
         })
         .on('error', (err) => {
-            var errorMessage = err.message.replace(rtspUrl, '[REDACTED]');
+            var errorMessage = err.message;
             console.error('Error during recording:', errorMessage);
             if (errorMessage.includes('401 Unauthorized')) {
                 console.error('Check if the RTSP URL is correct and credentials are provided.');
