@@ -1,8 +1,8 @@
 {
-    "rtspUrl": "rtsp://admin:admin@192.168.100.2/1",
     "controlUrl": "http://admin:admin@192.168.100.2/web/cgi-bin/hi3510/ptzctrl.cgi",
     "timeZone": "Asia/Dubai",
     "liveStream": {
+        "url": "rtsp://admin:admin@192.168.100.2/2",
         "enabled": true,
         "port": 8054,
         "credentials": {
@@ -11,6 +11,7 @@
         }
     },
     "recording": {
+        "url": "rtsp://admin:admin@192.168.100.2/1",
         "recordingsDirectory": "recordings",
         "diskSpaceThresholdMb": 10000,
         "segmentTimeSeconds": 600,
