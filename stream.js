@@ -6,7 +6,7 @@ const axios = require('axios');
 var currentStream = null;
 async function startLiveStream(config) {
     await new Promise(r => setTimeout(r, 2000));
-    const rtspUrl = config.rtspUrl;
+    const rtspUrl = config.liveStream.url;
     fs.ensureDirSync('stream');
 
     currentStream = ffmpeg(rtspUrl)

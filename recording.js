@@ -10,7 +10,7 @@ function startRecording(config) {
     const startTimestamp = moment().tz(localTimeZone);
     const dateFolder = startTimestamp.format('YYYY.MM.DD');
     const timeFilename = startTimestamp.format('HH-mm-ss');
-    const rtspUrl = config.rtspUrl;
+    const rtspUrl = config.recording.url;
     const baseRecordingsDirectory = config.recording.recordingsDirectory;
     const segmentTime = config.recording.segmentTimeSeconds || 120;
 
