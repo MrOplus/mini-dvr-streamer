@@ -14,15 +14,17 @@ This project is a mini DVR streamer that records video streams from an RTSP sour
 
 To use the script, create a `config.json` file with the following parameters (based on `config.example.json` file):
 
-- **rtspUrl:** The RTSP stream URL.
+- **controlUrl:** The URL for controlling the camera.
 - **timeZone:** The time zone used to name the recordings (list of time zones: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
 - **liveStream:** Configuration for the live stream.
+  - **url:** The RTSP stream URL for live streaming.
   - **enabled:** Whether the live stream is enabled.
   - **port:** The port for the web server.
   - **credentials:** Basic authentication credentials for the live stream.
     - **username:** The username for the live stream.
     - **password:** The password for the live stream.
 - **recording:** Configuration for the recording.
+  - **url:** The RTSP stream URL for recording.
   - **recordingsDirectory:** The base directory where recordings are saved.
   - **diskSpaceThresholdMb:** The maximum size of the recording directory in megabytes. After the directory exceeds this size, the script will delete the oldest recordings to free up space.
   - **segmentTimeSeconds:** The duration of each recording segment in seconds.
@@ -32,9 +34,10 @@ Example `config.json`:
 
 ```json
 {
-    "rtspUrl": "rtsp://admin:admin@192.168.100.2/1",
+    "controlUrl": "http://admin:admin@192.168.100.2/web/cgi-bin/hi3510/ptzctrl.cgi",
     "timeZone": "Asia/Dubai",
     "liveStream": {
+        "url": "rtsp://admin:admin@192.168.100.2/2",
         "enabled": true,
         "port": 8054,
         "credentials": {
@@ -43,6 +46,7 @@ Example `config.json`:
         }
     },
     "recording": {
+        "url": "rtsp://admin:admin@192.168.100.2/1",
         "recordingsDirectory": "recordings",
         "diskSpaceThresholdMb": 10000,
         "segmentTimeSeconds": 600,
@@ -74,3 +78,7 @@ node index.js
 ## Stopping the Project
 
 To stop the project, press `Ctrl + C` in the terminal window where it is running.
+
+## Tested Against
+
+This project has been tested against `Prolynx IP Camera PL-WC0521` with software version `V7.7.4.1.1-20160920` and Device Id: `C6F0SeZ0N0P0L0`.
