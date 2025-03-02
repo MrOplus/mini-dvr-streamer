@@ -1,0 +1,12 @@
+services:
+  dvr:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: npm start
+    ports: 
+      - "8054:8054"
+    volumes:
+      - ./recordings:/app/recordings
+      - ./config.json:/app/config.json
+    

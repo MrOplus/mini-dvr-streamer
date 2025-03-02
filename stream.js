@@ -15,8 +15,8 @@ async function startLiveStream(config) {
         .audioCodec('aac')
         .outputOptions([
             '-f', 'hls',
-            '-hls_time', '2',
-            '-hls_list_size', '10',
+            '-hls_time', '1',
+            '-hls_list_size', '3',
             '-hls_flags', 'delete_segments',
             '-hls_segment_filename', 'stream/stream%03d.ts'
         ])
