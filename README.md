@@ -2,6 +2,10 @@
 
 This project is a mini DVR streamer that records video streams from an RTSP source and saves the recordings to a specified directory. It also provides a live streaming feature with a web server to view the stream.
 
+# Related Blogs Posts
+1. https://mroplus.medium.com/reviving-an-outdated-ip-camera-a-journey-through-legacy-tech-and-modern-solutions-671f8e3c7ac1
+2. https://mroplus.medium.com/turn-your-raspberrypi-into-a-nvr-3f1cc58a8497
+
 ## Features
 
 - **Continuous Recording:** The script continuously records the video stream and starts a new recording when the previous one ends.
